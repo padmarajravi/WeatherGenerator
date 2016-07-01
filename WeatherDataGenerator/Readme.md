@@ -93,7 +93,8 @@ Arg2 - output file path including file name
 
 Arg1 file format
 <STATION NAME><COMMA><LATITUDE><COMMA><LONGITUDE>
-Currently the elevation file for 
+Currently the elevation file for latitude range (-10 to -30) and longitude range (100  to 139) is loaded because of the large size of the DEM files. 
+Use the FileBasedDataProvider class (setElevationFile() method ) to load  DEM files if data needs to be generated for other altitudes.
 
 
 
