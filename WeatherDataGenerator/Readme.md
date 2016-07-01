@@ -85,7 +85,15 @@ This approach also needs some statistical variables about the past historic data
  Simulation approach will lead to a black box model , which does not give any control over the generated variable.  Brute force approach seemed too data heavy for a small application.  Statistical generation algorithms does not consider the topography and geography features. For the concern of time , fun of creating a toy environment and considering the control over the generated data , naive approach (Approach 1) is used in generating the weather data here.
 
 
+Usage 
+========================================================
+The generate() method takes two arguments - 
+Arg1 - File path which contains the latitude,longitude details and 
+Arg2 - output file path including file name
 
+Arg1 file format
+<STATION NAME><COMMA><LATITUDE><COMMA><LONGITUDE>
+Currently the elevation file for 
 
 
 
