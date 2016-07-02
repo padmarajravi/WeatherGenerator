@@ -80,6 +80,7 @@ public class FileBasedDataProvider implements DataProvider {
 					new DirectPosition2D(longitude, latitude));
 		} catch (CannotEvaluateException | IllegalArgumentException
 				| IOException e) {
+			e.printStackTrace();
 			throw new WeatherGeneratorException(e.getMessage());
 		}
 		return Integer.valueOf(objArray[0]).doubleValue();
@@ -133,6 +134,11 @@ public class FileBasedDataProvider implements DataProvider {
 	@Override
 	public Double getDistanceToEquator(Double latitude, Double longitude) {
 		return Math.abs(latitude * 111.11);
+	}
+	
+	public static void main(String[] args) throws WeatherGeneratorException {
+		FileBasedDataProvider prov=new FileBasedDataProvider();
+		System.out.println(prov.getElevation(-32.143371,124.013672));
 	}
 
 }
