@@ -1,11 +1,34 @@
 This project is to generate realistic weather data over a large area based on a toy environment considering various geographic and topographic features.
 
+
 Four attributes that will be generated as weather data are
 
 1)Condition - specified by SUNNY,RAINY or SNOWY
 2)Temperature - A double value
 3)Pressure - A double value
 4)Humidity - An integer value
+
+
+
+Usage 
+========================================================
+The generate() method takes two arguments - 
+Arg1 - File path which contains the latitude,longitude details and 
+Arg2 - output file path including file name
+
+Arg1 file format
+<STATION NAME><COMMA><LATITUDE><COMMA><LONGITUDE>
+
+The code needs two data files for elevation and water body information.
+Extract the data.zip to the directory from where the jar file is running.
+
+Currently the elevation file for latitude range (-10 to -30) and longitude range (100  to 139) is loaded because of the large size of the DEM files. 
+Use the FileBasedDataProvider class (setElevationFile() method ) to load  DEM files if data needs to be generated for other latitude/longitude.
+
+
+
+Approach
+=========================================================
 
 For the scope of this project , two geographic features and one topographic feature was considered. Features considered were distance to equator , distance to closest water body and elevation above sea level.
 
@@ -85,16 +108,7 @@ This approach also needs some statistical variables about the past historic data
  Simulation approach will lead to a black box model , which does not give any control over the generated variable.  Brute force approach seemed too data heavy for a small application.  Statistical generation algorithms does not consider the topography and geography features. For the concern of time , fun of creating a toy environment and considering the control over the generated data , naive approach (Approach 1) is used in generating the weather data here.
 
 
-Usage 
-========================================================
-The generate() method takes two arguments - 
-Arg1 - File path which contains the latitude,longitude details and 
-Arg2 - output file path including file name
 
-Arg1 file format
-<STATION NAME><COMMA><LATITUDE><COMMA><LONGITUDE>
-Currently the elevation file for latitude range (-10 to -30) and longitude range (100  to 139) is loaded because of the large size of the DEM files. 
-Use the FileBasedDataProvider class (setElevationFile() method ) to load  DEM files if data needs to be generated for other altitudes.
 
 
 
