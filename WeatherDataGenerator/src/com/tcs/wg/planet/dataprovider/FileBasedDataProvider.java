@@ -23,6 +23,8 @@ import com.vividsolutions.jts.geom.Point;
 
 public class FileBasedDataProvider implements DataProvider {
 
+	String elevationFilePath;
+	String shapeFilePath;
 	File elevationFile;
 	File shapeFile;
 	GTopo30Reader elevationReader;
@@ -49,21 +51,49 @@ public class FileBasedDataProvider implements DataProvider {
 
 	}
 
-	public File getElevationFile() {
-		return elevationFile;
+	
+
+	public FileBasedDataProvider(String elevationFilePath, String shapeFilePath) throws WeatherGeneratorException {
+		super();
+		this.elevationFilePath = elevationFilePath;
+		this.shapeFilePath = shapeFilePath;
+		File elevationFile = new File(elevationFilePath);
+		try {
+			elevationReader = new GTopo30Reader(elevationFile);
+			File shapeFIle = new File(shapeFilePath);
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("url", shapeFIle.toURI().toURL());
+			shapeFileDataStore = DataStoreFinder.getDataStore(map);
+		} catch (IOException e) {
+			throw new WeatherGeneratorException(e.getMessage());
+		}
 	}
 
-	public void setElevationFile(File elevationFile) {
-		this.elevationFile = elevationFile;
+
+
+	public String getElevationFileName() {
+		return elevationFilePath;
 	}
 
-	public File getShapeFile() {
-		return shapeFile;
+
+
+	public void setElevationFileName(String elevationFileName) {
+		this.elevationFilePath = elevationFileName;
 	}
 
-	public void setShapeFile(File shapeFile) {
-		this.shapeFile = shapeFile;
+
+
+	public String getShapeFileName() {
+		return shapeFilePath;
 	}
+
+
+
+	public void setShapeFileName(String shapeFileName) {
+		this.shapeFilePath = shapeFileName;
+	}
+
+
 
 	/**
 	 * Reads the GTOP30 elevation file and provides the elevation.

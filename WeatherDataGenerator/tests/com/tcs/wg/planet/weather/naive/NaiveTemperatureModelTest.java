@@ -19,7 +19,7 @@ public class NaiveTemperatureModelTest extends NaiveModelTestBase{
 		date = DateTime.parse("22-05-2016 12:00 AM",
 				DateTimeFormat.forPattern(dataFormat));
 		expectedTemperature=19.1;
-		assertEquals(expectedTemperature,tempModel.getTemperature(date, env),1);
+		assertEquals(expectedTemperature,tempModel.getTemperature(date, env),2);
 		
 	}
 	
@@ -30,7 +30,7 @@ public class NaiveTemperatureModelTest extends NaiveModelTestBase{
 		expectedTemperature=20.5;
 		date = DateTime.parse("22-05-2016 08:00 AM",
 				DateTimeFormat.forPattern(dataFormat));
-		assertEquals(expectedTemperature,tempModel.getTemperature(date, env),1);
+		assertEquals(expectedTemperature,tempModel.getTemperature(date, env),2);
 		
 	}
 	
@@ -41,7 +41,7 @@ public class NaiveTemperatureModelTest extends NaiveModelTestBase{
 		expectedTemperature=21.9;
 		date = DateTime.parse("22-05-2016 12:00 PM",
 				DateTimeFormat.forPattern(dataFormat));
-		assertEquals(expectedTemperature,tempModel.getTemperature(date, env),1);
+		assertEquals(expectedTemperature,tempModel.getTemperature(date, env),2);
 		
 	}
 	
@@ -52,7 +52,7 @@ public class NaiveTemperatureModelTest extends NaiveModelTestBase{
 		expectedTemperature=13.0;
 		date = DateTime.parse("22-12-2016 12:00 PM",
 				DateTimeFormat.forPattern(dataFormat));
-		assertEquals(expectedTemperature,tempModel.getTemperature(date, env),1);
+		assertEquals(expectedTemperature,tempModel.getTemperature(date, env),2);
 		
 	}
 	
@@ -63,7 +63,7 @@ public class NaiveTemperatureModelTest extends NaiveModelTestBase{
 		expectedTemperature=11.5;
 		date = DateTime.parse("22-12-2016 12:00 PM",
 				DateTimeFormat.forPattern(dataFormat));
-		assertEquals(expectedTemperature,tempModel.getTemperature(date, env),1);
+		assertEquals(expectedTemperature,tempModel.getTemperature(date, env),2);
 		
 	}
 	
