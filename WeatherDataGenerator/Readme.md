@@ -8,7 +8,7 @@ Four attributes that will be generated as weather data are
 3)Pressure - A double value
 4)Humidity - An integer value
 
-
+The generated data sample is in file named weather_data.txt.
 
 Usage 
 ========================================================
