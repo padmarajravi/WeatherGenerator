@@ -29,6 +29,9 @@ public class NaivePressureModel implements PressureModel {
 	 * This method calculates the pressure using hypsothermal pressure equation.
 	 * P=P0*(1-(h*.0065/(h+temperature+273.15)^5.257) It uses the temperature of
 	 * the environment and the elevation to generate the pressure value.
+	 * Reference: http://keisan.casio.com/has10/SpecExec.cgi?id=system/2006/1224585971
+	 * Reference: http://hyperphysics.phy-astr.gsu.edu/hbase/kinetic/barfor.html
+	 * 
 	 * 
 	 */
 	Double p0 = 1013.25;

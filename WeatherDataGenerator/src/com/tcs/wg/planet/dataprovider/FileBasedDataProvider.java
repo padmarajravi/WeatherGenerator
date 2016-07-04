@@ -16,6 +16,7 @@ import org.opengis.coverage.CannotEvaluateException;
 import org.opengis.feature.simple.SimpleFeature;
 
 import com.tcs.wg.exception.WeatherGeneratorException;
+import com.tcs.wg.util.Constants;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.GeometryFactory;
@@ -32,10 +33,10 @@ public class FileBasedDataProvider implements DataProvider {
 
 	/**
 	 * Initializes by default with elevation file for east 100 degree and south
-	 * 10 degree .Throws an out of coverage exception for latitude and longitude
-	 * other than this area.
+	 * 10 degree .Throws an WeatherGeneratorException exception if methods are
+	 * accessed for latitude and longitude other than this area.
 	 * 
-	 * @throws IOException
+	 * @throws WeatherGeneratorException
 	 */
 	public FileBasedDataProvider() throws WeatherGeneratorException {
 		File elevationFile = new File("data/elevation/E100S10.DEM");
@@ -51,7 +52,16 @@ public class FileBasedDataProvider implements DataProvider {
 
 	}
 
-	
+	/**
+	 * Constructor for initializing with data files other than the default
+	 * files. Takes two arguments - elevationFilePath and shapeFilePath
+	 * Elevation FIle is expected to be a .DEM from gtop30 dataset and shape
+	 * file is expected to be a .shp file
+	 * 
+	 * @param elevationFilePath
+	 * @param shapeFilePath
+	 * @throws WeatherGeneratorException
+	 */
 
 	public FileBasedDataProvider(String elevationFilePath, String shapeFilePath) throws WeatherGeneratorException {
 		super();
@@ -68,32 +78,40 @@ public class FileBasedDataProvider implements DataProvider {
 			throw new WeatherGeneratorException(e.getMessage());
 		}
 	}
-
-
+	
+	/**
+	 * Returns the current elevation file name set if any.
+	 * @return
+	 */
 
 	public String getElevationFileName() {
 		return elevationFilePath;
 	}
 
-
-
+	
+	/**
+	 * Sets the instance with an elevationfile specified by the arguement.
+	 * @param elevationFileName
+	 */
 	public void setElevationFileName(String elevationFileName) {
 		this.elevationFilePath = elevationFileName;
 	}
 
-
-
+	/**
+	 * Returns the shape file name currently in use.
+	 * @return String
+	 */
 	public String getShapeFileName() {
 		return shapeFilePath;
 	}
 
-
-
+	/**
+	 * Sets the shape file name with a .shp file specified by shapeFileName
+	 * @param shapeFileName
+	 */
 	public void setShapeFileName(String shapeFileName) {
 		this.shapeFilePath = shapeFileName;
 	}
-
-
 
 	/**
 	 * Reads the GTOP30 elevation file and provides the elevation.
@@ -101,15 +119,12 @@ public class FileBasedDataProvider implements DataProvider {
 	 * @throws WeatherGeneratorException
 	 */
 	@Override
-	public Double getElevation(Double latitude, Double longitude)
-			throws WeatherGeneratorException {
+	public Double getElevation(Double latitude, Double longitude) throws WeatherGeneratorException {
 
 		int[] objArray;
 		try {
-			objArray = (int[]) elevationReader.read(null).evaluate(
-					new DirectPosition2D(longitude, latitude));
-		} catch (CannotEvaluateException | IllegalArgumentException
-				| IOException e) {
+			objArray = (int[]) elevationReader.read(null).evaluate(new DirectPosition2D(longitude, latitude));
+		} catch (CannotEvaluateException | IllegalArgumentException | IOException e) {
 			e.printStackTrace();
 			throw new WeatherGeneratorException(e.getMessage());
 		}
@@ -122,17 +137,14 @@ public class FileBasedDataProvider implements DataProvider {
 	 * distance to ocean. Gives 0.0 in case the point is in ocean.
 	 */
 	@Override
-	public Double getDistanceToWaterBody(Double latitude, Double longitude)
-			throws WeatherGeneratorException {
+	public Double getDistanceToWaterBody(Double latitude, Double longitude) throws WeatherGeneratorException {
 
-		Point p = new GeometryFactory().createPoint(new Coordinate(longitude,
-				latitude));
+		Point p = new GeometryFactory().createPoint(new Coordinate(longitude, latitude));
 		Double minDIstantToOcean = Double.MAX_VALUE;
 		String typeName;
 		try {
 			typeName = shapeFileDataStore.getTypeNames()[0];
-			SimpleFeatureSource featureSource = shapeFileDataStore
-					.getFeatureSource(typeName);
+			SimpleFeatureSource featureSource = shapeFileDataStore.getFeatureSource(typeName);
 			SimpleFeatureCollection collection = featureSource.getFeatures();
 			SimpleFeatureIterator iterator = collection.features();
 			Double curDistance;
@@ -153,7 +165,7 @@ public class FileBasedDataProvider implements DataProvider {
 		}
 
 		// Converting degree distance to meters.
-		return minDIstantToOcean * (Math.PI / 180) * 6378137;
+		return minDIstantToOcean * (Math.PI / 180) * Constants.EARTH_RADIUS;
 
 	}
 
@@ -163,12 +175,7 @@ public class FileBasedDataProvider implements DataProvider {
 	 */
 	@Override
 	public Double getDistanceToEquator(Double latitude, Double longitude) {
-		return Math.abs(latitude * 111.11);
-	}
-	
-	public static void main(String[] args) throws WeatherGeneratorException {
-		FileBasedDataProvider prov=new FileBasedDataProvider();
-		System.out.println(prov.getElevation(-32.143371,124.013672));
+		return Math.abs(latitude * Constants.DISTANCE_PER_LATITUDE);
 	}
 
 }

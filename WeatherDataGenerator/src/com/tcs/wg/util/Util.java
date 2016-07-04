@@ -33,8 +33,7 @@ public class Util {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	public static Set<WeatherStation> loadWeatherStationDetails(String filePath)
-			throws WeatherGeneratorException {
+	public static Set<WeatherStation> loadWeatherStationDetails(String filePath) throws WeatherGeneratorException {
 		Set<WeatherStation> weatherStationSet = new HashSet<WeatherStation>();
 		BufferedReader br;
 		String line;
@@ -43,9 +42,8 @@ public class Util {
 			while ((line = br.readLine()) != null) {
 				if (line.contains(STATION_DATA_DELIM)) {
 					String[] details = line.split(STATION_DATA_DELIM);
-					weatherStationSet.add(new WeatherStation(details[0], Double
-							.parseDouble(details[1]), Double
-							.parseDouble(details[2])));
+					weatherStationSet.add(new WeatherStation(details[0], Double.parseDouble(details[1]),
+							Double.parseDouble(details[2])));
 
 				}
 
@@ -59,6 +57,8 @@ public class Util {
 	}
 
 	/**
+	 * Creates record to be written as output based on DateTime , StationDetails
+	 * and Environment details.
 	 * 
 	 * @param now
 	 * @param station
@@ -66,12 +66,10 @@ public class Util {
 	 * @return
 	 */
 
-	public static String createRecord(DateTime now, WeatherStation station,
-			Environment env) {
-		return station.getStationCode() + "|" + env.getLatitude() + ","
-				+ env.getLongitude() + "," + env.getElevation() + "|" + now
-				+ "|" + env.getTemperature() + "|" + env.getPressure() + "|"
-				+ env.getHumidity() + "|" + env.getCondition();
+	public static String createRecord(DateTime now, WeatherStation station, Environment env) {
+		return station.getStationCode() + "|" + env.getLatitude() + "," + env.getLongitude() + "," + env.getElevation()
+				+ "|" + now + "|" + env.getTemperature() + "|" + env.getPressure() + "|" + env.getHumidity() + "|"
+				+ env.getCondition();
 	}
 
 }

@@ -22,7 +22,8 @@ public class NaiveTemperatureModel implements TemperatureModel {
 	Double poleToEquatorHighGradientZone = 3000.0;
 	Double poleToEquatorZone1Gradient = 13.0;
 	Double poleToEquatorZone2Gradient = 5.0;
-
+    Double temperatureAtPoles=-50.0;
+	
 	/**
 	 * Returns the temerature by considering 1) Distance from equator 2)
 	 * Elevation 3) Day of the year 4) Time of the day
@@ -30,7 +31,7 @@ public class NaiveTemperatureModel implements TemperatureModel {
 	 */
 	public Double getTemperature(DateTime time, Environment env) {
 
-		Double temperature = -50.0;
+		Double temperature = temperatureAtPoles;
 		temperature = adjustForPoleToEquatorGradient(temperature, env);
 		temperature = adjustForLapseRate(temperature, env);
 		temperature = adjustForSeasons(temperature, time);
@@ -124,7 +125,7 @@ public class NaiveTemperatureModel implements TemperatureModel {
 	private Double adjustForPoleToEquatorGradient(Double temperature,
 			Environment env) {
 
-		Double distanceFromPoles = Constants.EARTH_RADIUS
+		Double distanceFromPoles = Constants.POLE_EQUATOR_DISTANCE
 				- env.getDistanceToEquator();
 		if (distanceFromPoles < poleToEquatorHighGradientZone) {
 			temperature = temperature + distanceFromPoles

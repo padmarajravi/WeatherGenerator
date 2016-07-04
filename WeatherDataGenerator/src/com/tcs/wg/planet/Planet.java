@@ -5,7 +5,7 @@ import org.joda.time.DateTime;
 import com.tcs.wg.exception.WeatherGeneratorException;
 import com.tcs.wg.planet.dataprovider.DataProvider;
 import com.tcs.wg.planet.dataprovider.FileBasedDataProvider;
-import com.tcs.wg.planet.weather.WeatherGod;
+import com.tcs.wg.planet.weather.WeatherProvider;
 
 /**
  * 
@@ -19,55 +19,97 @@ import com.tcs.wg.planet.weather.WeatherGod;
 public class Planet {
 	String name;
 	DataProvider dataProvider;
-	WeatherGod weatherGod;
+	WeatherProvider weatherProvider;
 
-	public Planet() throws WeatherGeneratorException
-	{
-		dataProvider=new FileBasedDataProvider();
-		weatherGod=new WeatherGod();
-	}
-	
-	public Environment getEnvironment(Double latitude, Double longitude) {
-		return new Environment();
+	/**
+	 * Default constructor which intitializes with FileBasedDataProvider and
+	 * WeatherDataProvider..
+	 * 
+	 * @throws WeatherGeneratorException
+	 */
+	public Planet() throws WeatherGeneratorException {
+		dataProvider = new FileBasedDataProvider();
+		weatherProvider = new WeatherProvider();
 	}
 
+	/**
+	 * Sets the dataprovider with an instance of DataProvider interface.
+	 * 
+	 * @param provider
+	 * @return
+	 */
 	public Planet setDataProvider(DataProvider provider) {
 		this.dataProvider = provider;
 		return this;
 	}
 
+	/**
+	 * Returns the dataprovider (Instance of current DataProvider) if any has
+	 * been set.
+	 * 
+	 * @return
+	 */
 	public DataProvider getDataProvider() {
 		return this.dataProvider;
 	}
-	
-	
 
+	/**
+	 * Returns the name if initialized with.
+	 * 
+	 * @return
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Sets the name of the planet.
+	 * 
+	 * @param name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public WeatherGod getWeatherGod() {
-		return weatherGod;
+	/**
+	 * Returns the current WeatherProvider instance that has been set.
+	 * 
+	 * @return
+	 */
+	public WeatherProvider getWeatherProvider() {
+		return weatherProvider;
 	}
 
-	public void setWeatherGod(WeatherGod weatherGod) {
-		this.weatherGod = weatherGod;
+	/**
+	 * Sets the weatherProvider member with an instance of WeatherProvider.
+	 * 
+	 * @param weatherGod
+	 */
+	public void setWeatherProvider(WeatherProvider weatherProvider) {
+		this.weatherProvider = weatherProvider;
 	}
 
-	public Environment getCurrentReading(DateTime time,WeatherStation weatherStation) throws WeatherGeneratorException {
+	/**
+	 * Returns the current environment details as an Environment Object .Takse
+	 * two arguments - The time as a DateTime object and the weather station
+	 * details as a WeatherStation object.
+	 * 
+	 * @param time
+	 * @param weatherStation
+	 * @return Environment
+	 * @throws WeatherGeneratorException
+	 */
+	public Environment getCurrentReading(DateTime time, WeatherStation weatherStation)
+			throws WeatherGeneratorException {
 		Environment env = new Environment();
-		Double lat=weatherStation.getLatitude();
-		Double lon=weatherStation.getLongitude();
+		Double lat = weatherStation.getLatitude();
+		Double lon = weatherStation.getLongitude();
 		env.setLatitude(lat);
 		env.setLongitude(lon);
 		env.setElevation(dataProvider.getElevation(lat, lon));
 		env.setDistanceToWaterBody(dataProvider.getDistanceToWaterBody(lat, lon));
 		env.setDistanceToEquator(dataProvider.getDistanceToEquator(lat, lon));
-		return weatherGod.getCurrentEnvironment(time, env);
+		return weatherProvider.getCurrentEnvironment(time, env);
 
 	}
 

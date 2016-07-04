@@ -15,7 +15,7 @@ import com.tcs.wg.exception.WeatherGeneratorException;
 import com.tcs.wg.planet.Environment;
 import com.tcs.wg.planet.WeatherCondition;
 import com.tcs.wg.planet.WeatherStation;
-import com.tcs.wg.planet.weather.WeatherGod;
+import com.tcs.wg.planet.weather.WeatherProvider;
 
 public class UtilTest {
 
@@ -41,7 +41,7 @@ public class UtilTest {
 		humidity = 0.6736123763323371;
 		pressure = 994.3711617150576;
 		condition = WeatherCondition.SUNNY;
-		WeatherGod weatherGen = new WeatherGod();
+		WeatherProvider weatherGen = new WeatherProvider();
 		env = new Environment();
 		env.setLatitude(latitude);
 		env.setLongitude(longitude);
@@ -67,14 +67,13 @@ public class UtilTest {
 	}
 	
 	@Test
-	@Ignore
 	public void testLoadWeatherStationDetails() throws WeatherGeneratorException
 	{
 		Set<WeatherStation> stationSet=new HashSet<WeatherStation>();
 		stationSet.add(new WeatherStation("WST1",-33.911759,118.037109));
 		stationSet.add(new WeatherStation("WST2",-32.143371,124.013672));
 		Set<WeatherStation> actualSet = Util.loadWeatherStationDetails("data/tests/test_util_load_station.txt");
-		
+		assertEquals(actualSet.toString(),stationSet.toString());
 	}
 
 }

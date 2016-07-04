@@ -10,7 +10,7 @@ import com.tcs.wg.exception.WeatherGeneratorException;
 import com.tcs.wg.planet.Environment;
 import com.tcs.wg.planet.WeatherCondition;
 
-public class WeatherGodTest {
+public class WeatherProviderTest {
 
 	/**
 	 * 
@@ -18,7 +18,7 @@ public class WeatherGodTest {
 	 * 
 	 * Environment [latitude=-28.811309, longitude=130.341797, elevation=159.0,
 	 * distanceToWaterbody=308784.68645676225, distanceToEquator=3201.22454299,
-	 * temperature=15.210021888851502, humidity=0.6736123763323371,
+	 * temperature=15.210021888851502, humidity=69.33913612635517;,
 	 * pressure=994.3711617150576, condition=SUNNY]
 	 * 
 	 * @throws WeatherGeneratorException
@@ -34,7 +34,7 @@ public class WeatherGodTest {
 		Double humidity = 69.33913612635517;
 		Double pressure = 994.3711617150576;
 		WeatherCondition condition = WeatherCondition.RAINY;
-		WeatherGod weatherGen = new WeatherGod();
+		WeatherProvider weatherGen = new WeatherProvider();
 		DateTime date = DateTime.parse("22-05-1988 12:00",
 				DateTimeFormat.forPattern("dd-MM-yyyy hh:mm"));
 		Environment env = new Environment();

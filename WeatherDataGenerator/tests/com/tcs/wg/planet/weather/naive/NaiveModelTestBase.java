@@ -5,23 +5,26 @@ import org.junit.Before;
 
 import com.tcs.wg.planet.Environment;
 import com.tcs.wg.planet.WeatherCondition;
-import com.tcs.wg.planet.weather.WeatherGod;
+import com.tcs.wg.planet.weather.WeatherProvider;
 
+/**
+ * Base class for all the naive weather attribute model tests
+ * 
+ * @author ravi
+ *
+ */
 public class NaiveModelTestBase {
-	
+
 	final String dataFormat = "dd-MM-yyyy hh:mm a";
 	Environment env;
 	DateTime date;
 	Double expectedTemperature;
 	Double humidity;
 	Double pressure;
-	WeatherCondition condition ;
-	
-	
-	
+	WeatherCondition condition;
+
 	@Before
-	public void init()
-	{
+	public void init() {
 		Double latitude = -28.811309;
 		Double longitude = 130.341797;
 		Double elevation = 159.0;
@@ -31,7 +34,7 @@ public class NaiveModelTestBase {
 		humidity = 0.6736123763323371;
 		pressure = 994.3711617150576;
 		condition = WeatherCondition.SUNNY;
-		WeatherGod weatherGen = new WeatherGod();
+		WeatherProvider weatherGen = new WeatherProvider();
 		env = new Environment();
 		env.setLatitude(latitude);
 		env.setLongitude(longitude);
@@ -39,6 +42,5 @@ public class NaiveModelTestBase {
 		env.setDistanceToEquator(distanceToEquator);
 		env.setDistanceToWaterBody(distanceToWaterbody);
 	}
-	
 
 }

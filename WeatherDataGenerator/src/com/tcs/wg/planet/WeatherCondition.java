@@ -3,7 +3,7 @@ package com.tcs.wg.planet;
 
 /**
  * 
- * Enum which stores the possible weather consition.
+ * Enum which stores the possible weather conditions.
  * @author 472423
  *
  */
