@@ -22,8 +22,8 @@ public class NaiveTemperatureModel implements TemperatureModel {
 	Double poleToEquatorHighGradientZone = 3000.0;
 	Double poleToEquatorZone1Gradient = 13.0;
 	Double poleToEquatorZone2Gradient = 5.0;
-    Double temperatureAtPoles=-50.0;
-	
+	Double temperatureAtPoles = -50.0;
+
 	/**
 	 * Returns the temerature by considering 1) Distance from equator 2)
 	 * Elevation 3) Day of the year 4) Time of the day
@@ -54,11 +54,9 @@ public class NaiveTemperatureModel implements TemperatureModel {
 		int minTempHouyrOfDay = 4;
 		int currentHour = time.getHourOfDay();
 		if (currentHour > maxTempHourofDay) {
-			temperature = temperature + diurnalDecreaseGradientPerhour
-					* (currentHour - maxTempHourofDay);
+			temperature = temperature + diurnalDecreaseGradientPerhour * (currentHour - maxTempHourofDay);
 		} else {
-			temperature = temperature + diurnalDecreaseGradientPerhour
-					* (currentHour - minTempHouyrOfDay);
+			temperature = temperature + diurnalDecreaseGradientPerhour * (currentHour - minTempHouyrOfDay);
 		}
 		return temperature;
 	}
@@ -80,11 +78,11 @@ public class NaiveTemperatureModel implements TemperatureModel {
 		case 1:
 		case 2:
 			return temperature;
-			// spring
+		// spring
 		case 3:
 		case 4:
 			return temperature + 5;
-			// summer
+		// summer
 		case 5:
 		case 6:
 		case 7:
@@ -122,20 +120,15 @@ public class NaiveTemperatureModel implements TemperatureModel {
 	 * @param env
 	 * @return
 	 */
-	private Double adjustForPoleToEquatorGradient(Double temperature,
-			Environment env) {
+	private Double adjustForPoleToEquatorGradient(Double temperature, Environment env) {
 
-		Double distanceFromPoles = Constants.POLE_EQUATOR_DISTANCE
-				- env.getDistanceToEquator();
+		Double distanceFromPoles = Constants.POLE_EQUATOR_DISTANCE - env.getDistanceToEquator();
 		if (distanceFromPoles < poleToEquatorHighGradientZone) {
-			temperature = temperature + distanceFromPoles
-					* poleToEquatorZone1Gradient / 1000;
+			temperature = temperature + distanceFromPoles * poleToEquatorZone1Gradient / 1000;
 		} else {
-			//Adjusting for the low gradient towards equator.
-			temperature = temperature + poleToEquatorHighGradientZone
-					* (poleToEquatorZone1Gradient / 1000)
-					+ (distanceFromPoles - poleToEquatorHighGradientZone)
-					* (poleToEquatorZone2Gradient / 1000);
+			// Adjusting for the low gradient towards equator.
+			temperature = temperature + poleToEquatorHighGradientZone * (poleToEquatorZone1Gradient / 1000)
+					+ (distanceFromPoles - poleToEquatorHighGradientZone) * (poleToEquatorZone2Gradient / 1000);
 		}
 		return temperature;
 	}

@@ -32,18 +32,15 @@ public class NaiveHumidityModel implements HumidityModel {
 	@Override
 	public Double getHumidity(DateTime time, Environment env) {
 
-		Double saturatedWaterVaporDensity = 5.08 + 0.3231
-				* env.getTemperature() + .0081 * env.getTemperature()
-				* env.getTemperature();
-		Double vaporDensityOverOcean = oceanSaturatedvaporDensityProportion
-				* saturatedWaterVaporDensity;
-		Double distanceToWaterToBeConsidered = (env.getDistanceToWaterBody() > maxDistanceToWaterToBeCOnsidered) ? maxDistanceToWaterToBeCOnsidered
-				: env.getDistanceToWaterBody();
-		
+		Double saturatedWaterVaporDensity = 5.08 + 0.3231 * env.getTemperature()
+				+ .0081 * env.getTemperature() * env.getTemperature();
+		Double vaporDensityOverOcean = oceanSaturatedvaporDensityProportion * saturatedWaterVaporDensity;
+		Double distanceToWaterToBeConsidered = (env.getDistanceToWaterBody() > maxDistanceToWaterToBeCOnsidered)
+				? maxDistanceToWaterToBeCOnsidered : env.getDistanceToWaterBody();
+
 		Double actualVaporDensity = vaporDensityOverOcean
-				- distanceToWaterToBeConsidered
-				* distanceToWaterVaporDensityGradient;
-		return actualVaporDensity *100/ saturatedWaterVaporDensity;
+				- distanceToWaterToBeConsidered * distanceToWaterVaporDensityGradient;
+		return actualVaporDensity * 100 / saturatedWaterVaporDensity;
 
 	}
 

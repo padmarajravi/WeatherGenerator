@@ -78,9 +78,10 @@ public class FileBasedDataProvider implements DataProvider {
 			throw new WeatherGeneratorException(e.getMessage());
 		}
 	}
-	
+
 	/**
 	 * Returns the current elevation file name set if any.
+	 * 
 	 * @return
 	 */
 
@@ -88,9 +89,9 @@ public class FileBasedDataProvider implements DataProvider {
 		return elevationFilePath;
 	}
 
-	
 	/**
 	 * Sets the instance with an elevationfile specified by the arguement.
+	 * 
 	 * @param elevationFileName
 	 */
 	public void setElevationFileName(String elevationFileName) {
@@ -99,6 +100,7 @@ public class FileBasedDataProvider implements DataProvider {
 
 	/**
 	 * Returns the shape file name currently in use.
+	 * 
 	 * @return String
 	 */
 	public String getShapeFileName() {
@@ -107,6 +109,7 @@ public class FileBasedDataProvider implements DataProvider {
 
 	/**
 	 * Sets the shape file name with a .shp file specified by shapeFileName
+	 * 
 	 * @param shapeFileName
 	 */
 	public void setShapeFileName(String shapeFileName) {

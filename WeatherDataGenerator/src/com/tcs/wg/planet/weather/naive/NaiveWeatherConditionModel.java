@@ -31,9 +31,8 @@ public class NaiveWeatherConditionModel implements WeatherConditionModel {
 	public WeatherCondition getWeatherCondition(DateTime time, Environment env) {
 
 		WeatherCondition weatherCOndition = WeatherCondition.SUNNY;
-		if (env.getPressure() > rainPressureLimit
-				&& env.getHumidity() > rainHumidityLimit) {
-		 if (env.getTemperature() > rainTempLimit) {
+		if (env.getPressure() > rainPressureLimit && env.getHumidity() > rainHumidityLimit) {
+			if (env.getTemperature() > rainTempLimit) {
 				weatherCOndition = WeatherCondition.RAINY;
 			} else {
 				weatherCOndition = WeatherCondition.SNOWY;

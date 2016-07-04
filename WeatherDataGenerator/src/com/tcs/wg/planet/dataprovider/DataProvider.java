@@ -22,8 +22,7 @@ public interface DataProvider {
 	 * @throws Exception
 	 */
 
-	public Double getElevation(Double latitude, Double longitude)
-			throws WeatherGeneratorException;
+	public Double getElevation(Double latitude, Double longitude) throws WeatherGeneratorException;
 
 	/**
 	 * Implementation should return the distance to the nearest water body of
@@ -34,8 +33,7 @@ public interface DataProvider {
 	 * @return Double
 	 * @throws Exception
 	 */
-	public Double getDistanceToWaterBody(Double latitude, Double longitude)
-			throws WeatherGeneratorException;
+	public Double getDistanceToWaterBody(Double latitude, Double longitude) throws WeatherGeneratorException;
 
 	/**
 	 * Implementation should return the distance to equator of latitude and
@@ -46,7 +44,6 @@ public interface DataProvider {
 	 * @return Double
 	 * @throws Exception
 	 */
-	public Double getDistanceToEquator(Double latitude, Double longitude)
-			throws WeatherGeneratorException;
+	public Double getDistanceToEquator(Double latitude, Double longitude) throws WeatherGeneratorException;
 
 }
