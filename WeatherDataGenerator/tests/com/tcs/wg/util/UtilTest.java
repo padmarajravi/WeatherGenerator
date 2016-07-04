@@ -25,13 +25,14 @@ public class UtilTest {
 	Double expectedTemperature;
 	Double humidity;
 	Double pressure;
-	WeatherCondition condition ;
-	
-	
-	
+	WeatherCondition condition;
+
+	/**
+	 * Init method to initialize with an Environment instance.
+	 */
+
 	@Before
-	public void init()
-	{
+	public void init() {
 		Double latitude = -28.811309;
 		Double longitude = 130.341797;
 		Double elevation = 159.0;
@@ -52,28 +53,37 @@ public class UtilTest {
 		env.setPressure(1013.25);
 		env.setHumidity(0.7068576964443403);
 		env.setCondition(WeatherCondition.RAINY);
-		
-		
+
 	}
-	
+
+	/**
+	 * Tests the createRecord method with instances of Environment ,
+	 * WeatherStation and DateTime classes.
+	 */
+
 	@Test
 	public void testCreateRecord() {
-		String expectedString="WST9|-28.811309,130.341797,159.0|2016-05-22T12:00:00.000+05:30|21.993804095280275|1013.25|0.7068576964443403|RAINY";
-		WeatherStation station=new WeatherStation("WST9",-25.844724,118.212891);
-		DateTime time=DateTime.parse("22-05-2016 12:00 PM",DateTimeFormat.forPattern("dd-MM-yyyy hh:mm a"));
-	    String actualString=Util.createRecord(time, station, env);
-	    assertEquals(expectedString,actualString);
-	
+		String expectedString = "WST9|-28.811309,130.341797,159.0|2016-05-22T12:00:00.000+05:30|21.993804095280275|1013.25|0.7068576964443403|RAINY";
+		WeatherStation station = new WeatherStation("WST9", -25.844724, 118.212891);
+		DateTime time = DateTime.parse("22-05-2016 12:00 PM", DateTimeFormat.forPattern("dd-MM-yyyy hh:mm a"));
+		String actualString = Util.createRecord(time, station, env);
+		assertEquals(expectedString, actualString);
+
 	}
-	
+
+	/**
+	 * Tests the loadWeatherStationDetails method with a test input file at
+	 * data/tests/test_util_load_station.txt
+	 * 
+	 * @throws WeatherGeneratorException
+	 */
 	@Test
-	public void testLoadWeatherStationDetails() throws WeatherGeneratorException
-	{
-		Set<WeatherStation> stationSet=new HashSet<WeatherStation>();
-		stationSet.add(new WeatherStation("WST1",-33.911759,118.037109));
-		stationSet.add(new WeatherStation("WST2",-32.143371,124.013672));
+	public void testLoadWeatherStationDetails() throws WeatherGeneratorException {
+		Set<WeatherStation> stationSet = new HashSet<WeatherStation>();
+		stationSet.add(new WeatherStation("WST1", -33.911759, 118.037109));
+		stationSet.add(new WeatherStation("WST2", -32.143371, 124.013672));
 		Set<WeatherStation> actualSet = Util.loadWeatherStationDetails("data/tests/test_util_load_station.txt");
-		assertEquals(actualSet.toString(),stationSet.toString());
+		assertEquals(actualSet.toString(), stationSet.toString());
 	}
 
 }

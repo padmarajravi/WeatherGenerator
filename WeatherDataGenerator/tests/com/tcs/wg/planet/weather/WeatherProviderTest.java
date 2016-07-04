@@ -14,7 +14,7 @@ public class WeatherProviderTest {
 
 	/**
 	 * 
-	 * Returns environment object
+	 * Tests the getCurrentEnvironment method of WeatherProvider.Thi method returns environment object
 	 * 
 	 * Environment [latitude=-28.811309, longitude=130.341797, elevation=159.0,
 	 * distanceToWaterbody=308784.68645676225, distanceToEquator=3201.22454299,
