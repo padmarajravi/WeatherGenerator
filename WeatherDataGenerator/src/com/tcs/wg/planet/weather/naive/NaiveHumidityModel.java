@@ -43,7 +43,7 @@ public class NaiveHumidityModel implements HumidityModel {
 		Double actualVaporDensity = vaporDensityOverOcean
 				- distanceToWaterToBeConsidered
 				* distanceToWaterVaporDensityGradient;
-		return actualVaporDensity / saturatedWaterVaporDensity;
+		return actualVaporDensity *100/ saturatedWaterVaporDensity;
 
 	}
 

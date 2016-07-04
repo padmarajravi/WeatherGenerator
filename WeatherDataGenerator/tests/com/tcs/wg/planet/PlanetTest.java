@@ -16,7 +16,7 @@ public class PlanetTest {
 	 * 
 	 * Environment [latitude=-28.811309, longitude=130.341797, elevation=159.0,
 	 * distanceToWaterbody=308784.68645676225, distanceToEquator=3201.22454299,
-	 * temperature=15.210021888851502, humidity=0.6736123763323371,
+	 * temperature=15.210021888851502, humidity=69.41500461278011,
 	 * pressure=994.3711617150576, condition=SUNNY]
 	 * 
 	 * @throws WeatherGeneratorException
@@ -30,9 +30,9 @@ public class PlanetTest {
 		Double distanceToWaterbody = 308784.68645676225;
 		Double distanceToEquator = 3201.22454299;
 		Double temperature = 18.786409294333463;
-		Double humidity = 0.6736123763323371;
+		Double humidity = 69.41500461278011;
 		Double pressure = 994.3711617150576;
-		WeatherCondition condition = WeatherCondition.SUNNY;
+		WeatherCondition condition = WeatherCondition.RAINY;
 
 		WeatherStation weatherStation = new WeatherStation("STA1", latitude,
 				longitude);
@@ -40,6 +40,7 @@ public class PlanetTest {
 				DateTimeFormat.forPattern("dd-MM-yyyy hh:mm"));
 		Environment actualResult = planet.getCurrentReading(date,
 				weatherStation);
+		System.out.println(actualResult.getHumidity());
 		assertEquals(latitude, actualResult.getLatitude(), 0);
 		assertEquals(longitude, actualResult.getLongitude(), 0);
 		assertEquals(elevation, actualResult.getElevation(), 0);
@@ -50,6 +51,7 @@ public class PlanetTest {
 		assertEquals(humidity, actualResult.getHumidity(), 1);
 		assertEquals(pressure, actualResult.getPressure(), 1);
 		assertEquals(condition, actualResult.getCondition());
+		
 
 	}
 

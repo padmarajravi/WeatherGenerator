@@ -14,7 +14,7 @@ public class NaiveHumidityModelTest extends NaiveModelTestBase{
 		HumidityModel humMode=new NaiveHumidityModel();
 		env.setTemperature(16.0);
 		env.setDistanceToWaterBody(50.0);
-		assertEquals(.80, humMode.getHumidity(date, env),.1);
+		assertEquals(80, humMode.getHumidity(date, env),1);
 	}
 	
 	@Test
@@ -22,7 +22,7 @@ public class NaiveHumidityModelTest extends NaiveModelTestBase{
 		HumidityModel humMode=new NaiveHumidityModel();
 		env.setTemperature(40.0);
 		env.setDistanceToWaterBody(5000.0);
-		assertEquals(.70, humMode.getHumidity(date, env),.1);
+		assertEquals(75, humMode.getHumidity(date, env),1);
 	}
 	
 	@Test
@@ -30,7 +30,7 @@ public class NaiveHumidityModelTest extends NaiveModelTestBase{
 		HumidityModel humMode=new NaiveHumidityModel();
 		env.setTemperature(16.0);
 		env.setDistanceToWaterBody(5000.0);
-		assertEquals(.67, humMode.getHumidity(date, env),.1);
+		assertEquals(67, humMode.getHumidity(date, env),1);
 	}
 	
 	

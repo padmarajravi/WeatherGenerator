@@ -31,9 +31,9 @@ public class WeatherGodTest {
 		Double distanceToWaterbody = 308784.68645676225;
 		Double distanceToEquator = 3201.22454299;
 		Double temperature = 19.2;
-		Double humidity = 0.6736123763323371;
+		Double humidity = 69.33913612635517;
 		Double pressure = 994.3711617150576;
-		WeatherCondition condition = WeatherCondition.SUNNY;
+		WeatherCondition condition = WeatherCondition.RAINY;
 		WeatherGod weatherGen = new WeatherGod();
 		DateTime date = DateTime.parse("22-05-1988 12:00",
 				DateTimeFormat.forPattern("dd-MM-yyyy hh:mm"));
@@ -45,6 +45,7 @@ public class WeatherGodTest {
 		env.setDistanceToWaterBody(distanceToWaterbody);
 
 		Environment actualResult = weatherGen.getCurrentEnvironment(date, env);
+		System.out.println(actualResult.getHumidity());
 		assertEquals(latitude, actualResult.getLatitude(), 0);
 		assertEquals(longitude, actualResult.getLongitude(), 0);
 		assertEquals(elevation, actualResult.getElevation(), 0);
